@@ -26,3 +26,4 @@ Values are translations. If a key is missing, Laravel falls back to the key itse
 
 - `en.json` — English (default)
 - `pl.json` — Polski (Polish)
+- `pt_BR.json` — Português (Brasil) (Brazilian Portuguese), with Laravel's own messages in `pt_BR/`

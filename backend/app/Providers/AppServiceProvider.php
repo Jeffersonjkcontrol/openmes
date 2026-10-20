@@ -305,6 +305,7 @@ class AppServiceProvider extends ServiceProvider
             'tr' => 'Türkçe',
             'de' => 'Deutsch',
             'vi' => 'Tiếng Việt',
+            'pt_BR' => 'Português (Brasil)',
         ];
     }
 }

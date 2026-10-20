@@ -70,6 +70,8 @@ const BCP47 = {
     pl: 'pl-PL',
     tr: 'tr-TR',
     vi: 'vi-VN',
+    // Laravel names the locale pt_BR (lang/pt_BR.json); Intl rejects the underscore.
+    pt_BR: 'pt-BR',
 };
 
 /** The active locale as a BCP-47 tag, for `Intl` and for locale-free packages. */

@@ -94,6 +94,7 @@ return [
         'tr' => 'Türkçe',
         'de' => 'Deutsch',
         'vi' => 'Tiếng Việt',
+        'pt_BR' => 'Português (Brasil)',
     ],
 
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),

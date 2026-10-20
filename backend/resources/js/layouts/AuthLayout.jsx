@@ -1,5 +1,6 @@
 import { usePage } from '@inertiajs/react';
 import { Dropdown } from '@openmes/ui';
+import { __ } from '../lib/i18n';
 
 /**
  * Centered card chrome for unauthenticated pages — the React port of
@@ -20,7 +21,7 @@ export default function AuthLayout({ children }) {
                 {/* Logo / Header — real brand mark, matching the authenticated app shell */}
                 <div className="text-center mb-8">
                     <img src="/logo_open_mes.png" alt="OpenMES" className="h-9 w-auto mx-auto mb-3" />
-                    <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-om-faint">Manufacturing Execution System</p>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-om-faint">{__('Manufacturing Execution System')}</p>
                 </div>
 
                 {/* Auth Card */}
@@ -48,11 +49,11 @@ export default function AuthLayout({ children }) {
                             value={locale == null ? '' : String(locale)}
                             onChange={(v) => { window.location.href = `/locale/${v}`; }}
                             options={Object.entries(locales).map(([code, label]) => ({ value: String(code), label }))}
-                            aria-label="Language"
+                            aria-label={__('Language')}
                             className="mx-auto"
                         />
                     )}
-                    <p className="font-mono text-[11px] text-om-faint">&copy; {new Date().getFullYear()} All rights reserved.</p>
+                    <p className="font-mono text-[11px] text-om-faint">&copy; {new Date().getFullYear()} {__('All rights reserved')}.</p>
                 </div>
             </div>
         </div>
