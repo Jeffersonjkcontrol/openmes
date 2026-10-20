@@ -1,6 +1,6 @@
 // Geist White restyle: light-only v1 — om-* tokens + @openmes/ui (live-shape wiring and stats logic untouched).
 import { useMemo, useState } from 'react';
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { Badge, Dropdown, StatusPill } from '@openmes/ui';
 import { DataTable } from '@openmes/ui/table';
 import { useDashboardShapes } from '../../lib/useDashboardShapes';
@@ -185,9 +185,10 @@ function DashboardBody({
 }
 
 function Header({ selectedLineId, onLineChange, lines }) {
-    const { locale } = usePage().props;
     const selectedLine = lines.find((l) => String(l.id) === String(selectedLineId));
-    const dateStr = new Date().toLocaleString(locale, {
+    // formatDateTime maps the app locale to a BCP 47 tag: Intl throws a RangeError
+    // on "pt_BR", which blanked the whole page.
+    const dateStr = formatDateTime(new Date(), {
         day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit',
     });
     return (
