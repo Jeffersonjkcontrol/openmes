@@ -1,5 +1,6 @@
 import { Button, Checkbox, Dropdown, Icon } from '@openmes/ui';
 import Tooltip from './Tooltip';
+import { __ } from '../lib/i18n';
 
 /**
  * Editable list of sub-rows for dynamic subforms (e.g. view-template columns,
@@ -18,7 +19,7 @@ import Tooltip from './Tooltip';
 const INPUT_CLASS =
     'w-full bg-om-bg border border-om-line rounded-om-sm px-3 py-1.5 text-[13px] text-om-ink outline-none placeholder:text-om-faint focus:border-om-accent focus:ring-[3px] focus:ring-[rgba(234,90,43,.12)]';
 
-export default function RepeatableRows({ value, onChange, fields, addLabel = 'Add row', newRow }) {
+export default function RepeatableRows({ value, onChange, fields, addLabel = __('Add row'), newRow }) {
     const rows = value ?? [];
 
     const makeRow = newRow ?? (() => Object.fromEntries(fields.map((f) => [f.name, f.type === 'select' ? (f.options?.[0]?.value ?? '') : ''])));
@@ -32,7 +33,7 @@ export default function RepeatableRows({ value, onChange, fields, addLabel = 'Ad
                 {fields.map((f) => <div key={f.name} className={f.width ?? 'flex-1'}>{f.label}</div>)}
                 <div className="w-8" />
             </div>
-            {rows.length === 0 && <p className="text-[13px] text-om-faint px-1">No rows yet.</p>}
+            {rows.length === 0 && <p className="text-[13px] text-om-faint px-1">{__('No rows yet.')}</p>}
             {rows.map((row, i) => (
                 <div key={i} className="flex items-center gap-2">
                     {fields.map((f) => (
@@ -61,12 +62,12 @@ export default function RepeatableRows({ value, onChange, fields, addLabel = 'Ad
                             )}
                         </div>
                     ))}
-                    <Tooltip label="Remove">
+                    <Tooltip label={__('Remove')}>
                         <button
                             type="button"
                             onClick={() => remove(i)}
                             className="w-8 h-8 shrink-0 rounded-om-sm text-lg leading-none text-om-blocked hover:bg-om-blocked-bg transition-colors"
-                            aria-label="Remove"
+                            aria-label={__('Remove')}
                         >
                             ×
                         </button>

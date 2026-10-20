@@ -10,7 +10,7 @@ export default function WorkOrderEdit() {
     const { workOrder, lines = [], productTypes = [], customers = [], bomTemplates = [], productRevisions = [], customFields = [] } = usePage().props;
     return (
         <div className="max-w-7xl mx-auto">
-            <Head title={`Edit ${workOrder.order_no}`} />
+            <Head title={__('Edit :name', { name: workOrder.order_no })} />
             <h1 className="text-3xl font-bold text-om-ink mb-6">{__("Edit Work Order")}</h1>
             <ResourceForm
                 action={`/admin/work-orders/${workOrder.id}`}

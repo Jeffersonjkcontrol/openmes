@@ -30,6 +30,14 @@ const BATCH_PILL_STATUS = {
     DONE: 'done',
 };
 
+/** Batch status → display text (translated on render). */
+const BATCH_STATUS_LABELS = {
+    PENDING: 'Pending',
+    IN_PROGRESS: 'In Progress',
+    DONE: 'Done',
+    CANCELLED: 'Cancelled',
+};
+
 /** Routing-step status → the stepper's vocabulary. */
 const STEP_STATUS = {
     DONE: 'done',
@@ -98,10 +106,10 @@ function BatchRow({ batch, processSnapshot, workstationTypeNames = {}, onAssign 
                 onClick={() => setOpen((o) => !o)}
             >
                 <div className="flex items-center gap-3">
-                    <span className="font-semibold text-om-ink">Batch #{batch.batch_number}</span>
+                    <span className="font-semibold text-om-ink">{__('Batch #:number', { number: batch.batch_number })}</span>
                     <StatusPill
                         status={BATCH_PILL_STATUS[batch.status] ?? 'pending'}
-                        label={batch.status.replace('_', ' ')}
+                        label={BATCH_STATUS_LABELS[batch.status] ? __(BATCH_STATUS_LABELS[batch.status]) : batch.status.replace('_', ' ')}
                     />
                     <span className="font-mono text-[12px] text-om-muted">
                         {fmtQty(batch.produced_qty)} / {fmtQty(batch.target_qty)}
@@ -136,10 +144,10 @@ function BatchRow({ batch, processSnapshot, workstationTypeNames = {}, onAssign 
                                 status: STEP_STATUS[step.status] ?? 'pending',
                                 meta: actual != null ? (
                                     <span className={`font-mono font-medium ${overTime ? 'text-om-blocked' : 'text-om-running'}`}>
-                                        {actual}min{estimated ? ` / est. ${estimated}min` : ''}
+                                        {actual}min{estimated ? ` / ${__('est.')} ${estimated}min` : ''}
                                     </span>
                                 ) : estimated != null ? (
-                                    <span className="font-mono text-om-faint">est. {estimated}min</span>
+                                    <span className="font-mono text-om-faint">{__('est.')} {estimated}min</span>
                                 ) : null,
                                 action: ['PENDING', 'READY'].includes(step.status) && step.workstation_type_id && !step.workstation_id ? (
                                     <button
@@ -159,8 +167,8 @@ function BatchRow({ batch, processSnapshot, workstationTypeNames = {}, onAssign 
                     />
                     {batch.started_at && (
                         <p className="text-xs text-om-faint pt-1">
-                            Started: {fmtDateTime(batch.started_at)}
-                            {batch.completed_at ? ` · Completed: ${fmtDateTime(batch.completed_at)}` : ''}
+                            {__('Started:')} {fmtDateTime(batch.started_at)}
+                            {batch.completed_at ? ` · ${__('Completed')}: ${fmtDateTime(batch.completed_at)}` : ''}
                         </p>
                     )}
                 </div>
@@ -203,10 +211,10 @@ function DoneModal({ workOrder, onClose }) {
                     </div>
                     <div className="flex justify-end gap-2">
                         <Button type="button" variant="secondary" onClick={onClose}>
-                            Cancel
+                            {__('Cancel')}
                         </Button>
                         <Button type="submit" variant="accent">
-                            Mark as Done
+                            {__('Mark as Done')}
                         </Button>
                     </div>
                 </form>
@@ -309,13 +317,13 @@ export default function SupervisorWorkOrderShow() {
                         {status === 'PENDING' && (
                             <>
                                 <Button variant="primary" onClick={() => post('accept')}>
-                                    Accept
+                                    {__('Accept')}
                                 </Button>
                                 <Button
                                     variant="danger"
                                     onClick={() => confirm({ title: __('Reject this work order?') }, () => post('reject'))}
                                 >
-                                    Reject
+                                    {__('Reject')}
                                 </Button>
                             </>
                         )}
@@ -324,16 +332,16 @@ export default function SupervisorWorkOrderShow() {
                                 variant="danger"
                                 onClick={() => confirm({ title: __('Reject this work order?') }, () => post('reject'))}
                             >
-                                Reject
+                                {__('Reject')}
                             </Button>
                         )}
                         {status === 'IN_PROGRESS' && (
                             <>
                                 <Button variant="secondary" onClick={() => post('pause')}>
-                                    Pause
+                                    {__('Pause')}
                                 </Button>
                                 <Button variant="accent" onClick={() => setShowDoneModal(true)}>
-                                    Done
+                                    {__('Done')}
                                 </Button>
                             </>
                         )}
@@ -341,7 +349,7 @@ export default function SupervisorWorkOrderShow() {
                             approved change has been applied and answers with the reason (#182). */}
                         {['PAUSED', 'CHANGE_HOLD'].includes(status) && (
                             <Button variant="primary" onClick={() => post('resume')}>
-                                Resume
+                                {__('Resume')}
                             </Button>
                         )}
 
@@ -350,7 +358,7 @@ export default function SupervisorWorkOrderShow() {
                                 variant="primary"
                                 onClick={() => confirm({ title: __('Reopen this work order?') }, () => post('reopen'))}
                             >
-                                Reopen
+                                {__('Reopen')}
                             </Button>
                         ) : (
                             <>
@@ -358,13 +366,13 @@ export default function SupervisorWorkOrderShow() {
                                     href={`/supervisor/work-orders/${workOrder.id}/edit`}
                                     className={LINK_GHOST}
                                 >
-                                    Edit
+                                    {__('Edit')}
                                 </Link>
                                 <button
                                     onClick={() => confirm({ title: __('Cancel this work order?') }, () => post('cancel'))}
                                     className="inline-flex items-center justify-center gap-2 text-[13px] font-semibold rounded-om-sm border border-om-line px-4 py-[9px] text-om-accent hover:bg-om-chip transition-colors cursor-pointer"
                                 >
-                                    Cancel
+                                    {__('Cancel')}
                                 </button>
                             </>
                         )}
@@ -373,7 +381,7 @@ export default function SupervisorWorkOrderShow() {
                             href="/supervisor/work-orders"
                             className={LINK_GHOST}
                         >
-                            ← Back
+                            {__('← Back')}
                         </Link>
                     </div>
                 </div>

@@ -19,6 +19,19 @@ export function StatusDot({ color, pulse = false, size = 'w-2.5 h-2.5' }) {
     return <span className={`${size} rounded-full shrink-0 ${cls} ${pulse ? 'animate-pulse' : ''}`} />;
 }
 
+// Connection status as stored (MachineConnection::STATUS_*) → display text.
+const CONNECTION_STATUS_LABELS = {
+    connected:    'Connected',
+    disconnected: 'Disconnected',
+    connecting:   'Connecting',
+    error:        'Error',
+};
+
+/** Translated label for a connection's `status` value. */
+export function connectionStatusLabel(status) {
+    return __(CONNECTION_STATUS_LABELS[status] ?? status ?? '');
+}
+
 /** Centered metric card used on the connection Show pages. */
 export function StatCard({ value, label, capitalize = false }) {
     return (

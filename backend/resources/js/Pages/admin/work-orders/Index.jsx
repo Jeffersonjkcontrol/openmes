@@ -52,7 +52,7 @@ export default function WorkOrdersIndex() {
             )}
             {lineFilter && (
                 <span className="text-xs px-2 py-0.5 rounded bg-om-chip text-om-muted">
-                    {lineNames[lineFilter] ?? `Line ${lineFilter}`}
+                    {lineNames[lineFilter] ?? __('Line :id', { id: lineFilter })}
                 </span>
             )}
             <a href="/admin/work-orders" className="text-om-accent hover:underline">{__('Clear')}</a>

@@ -32,7 +32,7 @@ export default function UserEdit() {
 
     return (
         <div className="max-w-7xl mx-auto">
-            <Head title={`Edit ${user.name}`} />
+            <Head title={__('Edit :name', { name: user.name })} />
             <h1 className="text-3xl font-bold text-om-ink mb-6">{__("Edit Account")}</h1>
             {user.role === 'Operator' && <section className="card mb-6 max-w-3xl space-y-3">
                 <h2 className="font-semibold">{__('Operator assignments')}</h2>

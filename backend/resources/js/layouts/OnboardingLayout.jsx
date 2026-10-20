@@ -25,7 +25,7 @@ export default function OnboardingLayout({ children }) {
 
     return (
         <div className="bg-om-bg min-h-screen flex flex-col items-center justify-center p-4 font-sans">
-            <Head title="OpenMES — Setup Wizard" />
+            <Head title={`OpenMES — ${__('Setup Wizard')}`} />
             <div className="w-full max-w-2xl">
                 {/* Logo */}
                 <div className="text-center mb-8">

@@ -117,7 +117,7 @@ function TagRow({ tag, connectionId, basePath }) {
                     <span className="uppercase">{tag.data_type}</span>
                     {tag.register_type && <span>· {tag.register_type}</span>}
                     {tag.workstation && <span>· {tag.workstation}</span>}
-                    {scale != null && <span>· scale ×{scale}</span>}
+                    {scale != null && <span>· {__('Scale').toLowerCase()} ×{scale}</span>}
                     {valueMap && (
                         <span className="font-mono">
                             · {Object.entries(valueMap).map(([k, v]) => `${k}=${v}`).join(', ')}

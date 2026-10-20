@@ -72,7 +72,7 @@ export default function LotSequenceForm({ action, method, initial, submitLabel, 
                 if (r.status === 422) {
                     const body = await r.json();
                     setPreview(null);
-                    setPreviewError(body.errors?.pattern?.[0] ?? 'Invalid pattern');
+                    setPreviewError(body.errors?.pattern?.[0] ?? __('Invalid pattern'));
                     return;
                 }
                 if (!r.ok) throw new Error(`HTTP ${r.status}`);

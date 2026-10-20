@@ -5,6 +5,7 @@ import AppLayout from '../../../../layouts/AppLayout';
 import Tooltip from '../../../../components/Tooltip';
 import useConfirm from '../../../../components/useConfirm';
 import { __, formatNumber } from '../../../../lib/i18n';
+import { connectionStatusLabel } from '../ui';
 
 const STATUS_DOT = {
     green:  'bg-om-running',
@@ -34,7 +35,7 @@ export default function MqttIndex() {
                 return (
                     <div className="flex items-center gap-2">
                         <span className={`w-2 h-2 rounded-full ${dot} ${conn.status === 'connected' ? 'animate-pulse' : ''}`} />
-                        <span className="text-xs text-om-muted capitalize">{conn.status}</span>
+                        <span className="text-xs text-om-muted capitalize">{connectionStatusLabel(conn.status)}</span>
                     </div>
                 );
             },

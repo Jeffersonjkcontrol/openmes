@@ -2,12 +2,13 @@ import { Head } from '@inertiajs/react';
 import AppLayout from '../../../layouts/AppLayout';
 import ResourceForm from '../../../components/ResourceForm';
 import { COST_SOURCE_FIELDS, costSourceInitial } from './fields';
+import { __ } from '../../../lib/i18n';
 
 export default function CostSourceCreate() {
     return (
         <div className="max-w-7xl mx-auto">
-            <Head title="New Cost Source" />
-            <h1 className="text-3xl font-bold text-om-ink mb-6">New Cost Source</h1>
+            <Head title={__('New Cost Source')} />
+            <h1 className="text-3xl font-bold text-om-ink mb-6">{__('New Cost Source')}</h1>
             <ResourceForm
                 action="/admin/cost-sources"
                 method="post"

@@ -2,12 +2,13 @@ import { Head } from '@inertiajs/react';
 import AppLayout from '../../../layouts/AppLayout';
 import ResourceForm from '../../../components/ResourceForm';
 import { ISSUE_TYPE_FIELDS, issueTypeInitial } from './fields';
+import { __ } from '../../../lib/i18n';
 
 export default function IssueTypeCreate() {
     return (
         <div className="max-w-7xl mx-auto">
-            <Head title="New Issue Type" />
-            <h1 className="text-3xl font-bold text-om-ink mb-6">New Issue Type</h1>
+            <Head title={__('New Issue Type')} />
+            <h1 className="text-3xl font-bold text-om-ink mb-6">{__('New Issue Type')}</h1>
             <ResourceForm
                 action="/admin/issue-types"
                 method="post"

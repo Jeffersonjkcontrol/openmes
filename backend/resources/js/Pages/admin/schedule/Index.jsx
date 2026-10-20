@@ -74,7 +74,7 @@ export default function ScheduleIndex() {
 
     return (
         <>
-            <Head title="Production Schedule" />
+            <Head title={__('Production Schedule')} />
             <div>
                 {/* Header */}
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
@@ -134,7 +134,7 @@ export default function ScheduleIndex() {
                                 onClick={() => navigate({ line_id: lineId || '' })}
                                 className="text-sm text-om-accent hover:underline"
                             >
-                                Today
+                                {__('Today')}
                             </button>
                         )}
                     </div>
@@ -145,9 +145,9 @@ export default function ScheduleIndex() {
                         <svg className="w-14 h-14 text-om-faintest mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                         </svg>
-                        <p className="text-om-muted">No work orders scheduled for this week.</p>
+                        <p className="text-om-muted">{__('No work orders scheduled for this week.')}</p>
                         <Link href="/admin/work-orders/create" className="mt-4 btn-touch btn-primary px-4 py-2 bg-om-ink text-om-on-ink rounded-om-sm hover:bg-om-ink-hover">
-                            Create Work Order
+                            {__('Create Work Order')}
                         </Link>
                     </div>
                 ) : (
@@ -163,7 +163,7 @@ export default function ScheduleIndex() {
                                                 <span className="w-2 h-2 rounded-full bg-om-ink"></span>
                                                 {line.name}
                                                 <span className="text-xs font-normal text-om-faint">
-                                                    ({lineOrders.length} {lineOrders.length === 1 ? 'order' : 'orders'})
+                                                    ({lineOrders.length} {lineOrders.length === 1 ? __('order') : __('orders')})
                                                 </span>
                                             </h2>
                                             <OrderTable orders={lineOrders} />
@@ -174,7 +174,7 @@ export default function ScheduleIndex() {
                                     <div>
                                         <h2 className="flex items-center gap-2 text-base font-bold text-om-muted mb-2">
                                             <span className="w-2 h-2 rounded-full bg-om-faintest"></span>
-                                            No Line Assigned
+                                            {__('No Line Assigned')}
                                         </h2>
                                         <OrderTable orders={ordersByLine['__none__']} />
                                     </div>
@@ -195,7 +195,7 @@ function OrderTable({ orders }) {
         {
             id: 'order',
             accessorKey: 'order_no',
-            header: 'Order',
+            header: __('Order'),
             cell: ({ row }) => (
                 <span className="inline-flex items-center font-mono text-sm font-semibold text-om-accent bg-om-chip border border-om-line rounded px-2 py-0.5">
                     {row.original.order_no}
@@ -205,7 +205,7 @@ function OrderTable({ orders }) {
         {
             id: 'product',
             accessorKey: 'product_name',
-            header: 'Product',
+            header: __('Product'),
             cell: ({ row }) => (
                 <span className="text-sm text-om-muted">{row.original.product_name ?? '—'}</span>
             ),
@@ -213,7 +213,7 @@ function OrderTable({ orders }) {
         {
             id: 'due',
             accessorFn: (wo) => wo.due_date,
-            header: 'Due',
+            header: __('Due'),
             // The date says when, the countdown under it says how far away —
             // and carries the urgency in its colour, so the ⚠ that used to mark
             // an overdue row is now a figure telling you how late it actually is.
@@ -235,7 +235,7 @@ function OrderTable({ orders }) {
         {
             id: 'qty',
             accessorKey: 'planned_qty',
-            header: 'Qty',
+            header: __('Qty'),
             meta: { align: 'right' },
             cell: ({ row }) => (
                 <span className="text-sm text-om-muted">
@@ -246,7 +246,7 @@ function OrderTable({ orders }) {
         {
             id: 'status',
             accessorKey: 'status',
-            header: 'Status',
+            header: __('Status'),
             cell: ({ row }) => (
                 <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${STATUS_COLORS[row.original.status] ?? 'bg-om-chip text-om-muted'}`}>
                     {__(STATUS_LABELS[row.original.status] ?? row.original.status)}
@@ -256,7 +256,7 @@ function OrderTable({ orders }) {
         {
             id: 'priority',
             accessorKey: 'priority',
-            header: 'Priority',
+            header: __('Priority'),
             meta: { align: 'right' },
             cell: ({ row }) => (
                 row.original.priority ? (

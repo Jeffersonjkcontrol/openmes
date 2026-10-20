@@ -85,7 +85,7 @@ export default function Pin() {
                                 required
                             />
                             <Button type="submit" variant="danger" loading={removeProcessing}>
-                                Remove PIN
+                                {__('Remove PIN')}
                             </Button>
                         </form>
                     )}
